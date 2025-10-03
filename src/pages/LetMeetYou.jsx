@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const LetMeetYou = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,14 @@ const LetMeetYou = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  // Load saved data from localStorage on mount
+  useEffect(() => {
+    const savedData = localStorage.getItem("letMeetYouForm");
+    if (savedData) {
+      setFormData(JSON.parse(savedData));
+    }
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -22,11 +30,18 @@ const LetMeetYou = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
+
     console.log("Form submitted:", formData);
+
+    // Save to localStorage
+    localStorage.setItem("letMeetYouForm", JSON.stringify(formData));
+
+    alert("Data saved locally!");
   };
 
   return (
@@ -35,10 +50,7 @@ const LetMeetYou = () => {
       <div className="w-full flex justify-end text-sm p-4">
         <p>
           Already on Enum?{" "}
-          <a
-            href="#"
-            className="font-semibold text-blue-600 hover:underline"
-          >
+          <a href="#" className="font-semibold text-blue-600 hover:underline">
             Log in
           </a>
         </p>
@@ -53,9 +65,9 @@ const LetMeetYou = () => {
               Let's meet you
             </h1>
             <p className="text-gray-600 mb-8">
-              Just a few details to get you started — including verifying
-              your email — so we can personalize your setup and unlock the
-              right tools for you.
+              Just a few details to get you started — including verifying your
+              email — so we can personalize your setup and unlock the right
+              tools for you.
             </p>
 
             {/* Stepper */}
@@ -91,10 +103,7 @@ const LetMeetYou = () => {
                   value={formData.firstName}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full px-3 py-2 
-                             bg-white text-black border border-gray-300 rounded-md shadow-sm 
-                             placeholder-gray-400 
-                             focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
 
@@ -114,10 +123,7 @@ const LetMeetYou = () => {
                   value={formData.lastName}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full px-3 py-2 
-                             bg-white text-black border border-gray-300 rounded-md shadow-sm 
-                             placeholder-gray-400 
-                             focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
 
@@ -137,10 +143,7 @@ const LetMeetYou = () => {
                   value={formData.workEmail}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full px-3 py-2 
-                             bg-white text-black border border-gray-300 rounded-md shadow-sm 
-                             placeholder-gray-400 
-                             focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
 
@@ -161,10 +164,7 @@ const LetMeetYou = () => {
                     value={formData.password}
                     onChange={handleChange}
                     required
-                    className="block w-full px-3 py-2 
-                               bg-white text-black border border-gray-300 rounded-md shadow-sm 
-                               placeholder-gray-400 
-                               focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
                   <button
                     type="button"
@@ -193,10 +193,7 @@ const LetMeetYou = () => {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     required
-                    className="block w-full px-3 py-2 
-                               bg-white text-black border border-gray-300 rounded-md shadow-sm 
-                               placeholder-gray-400 
-                               focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
                   <button
                     type="button"
@@ -225,6 +222,6 @@ const LetMeetYou = () => {
       </main>
     </div>
   );
-}
+};
 
 export default LetMeetYou;

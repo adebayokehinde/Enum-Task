@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Upload from "../assets/Upload Field.png";
 
 export default function AddCompany() {
@@ -9,10 +9,25 @@ export default function AddCompany() {
     siteName: "",
     companySize: "",
     description: "",
-    usagePreferences: [], // ✅ Added usage preferences
+    usagePreferences: [],
   });
 
   const [activeStep, setActiveStep] = useState("Details");
+
+  // Load saved form from localStorage
+  useEffect(() => {
+    const savedForm = localStorage.getItem("addCompanyForm");
+    const savedStep = localStorage.getItem("addCompanyActiveStep");
+
+    if (savedForm) setForm(JSON.parse(savedForm));
+    if (savedStep) setActiveStep(savedStep);
+  }, []);
+
+  // Save form and step to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("addCompanyForm", JSON.stringify(form));
+    localStorage.setItem("addCompanyActiveStep", activeStep);
+  }, [form, activeStep]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -148,70 +163,69 @@ export default function AddCompany() {
           </div>
         );
 
-   case "Usage preference":
-  const usageOptions = [
-    "To train employees",
-    "To train partners",
-    "To sell assessments",
-    "To train customers",
-    "To hire talent",
-    "To sell question banks",
-    "To manage talent",
-    "To manage hub",
-    "To host live classes",
-    "To create events",
-    "For credentialing",
-    "To create courses",
-    "To manage programs",
-  ];
+      case "Usage preference":
+        const usageOptions = [
+          "To train employees",
+          "To train partners",
+          "To sell assessments",
+          "To train customers",
+          "To hire talent",
+          "To sell question banks",
+          "To manage talent",
+          "To manage hub",
+          "To host live classes",
+          "To create events",
+          "For credentialing",
+          "To create courses",
+          "To manage programs",
+        ];
 
-  return (
-    <div>
-      <h3 className="text-xl font-semibold mb-4">Usage preference</h3>
-      <p className="text-gray-600 mb-4">How will you like to use Enum?</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {usageOptions.map((option) => {
-          const isSelected = form.usagePreferences.includes(option);
-          return (
-            <button
-              key={option}
-              type="button"
-              onClick={() => togglePreference(option)}
-              className={`px-4 py-2 rounded-full border text-sm transition text-left ${
-                isSelected
-                  ? "bg-blue-100 text-blue-700 border-blue-200"
-                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
-              }`}
-            >
-              {option}
-            </button>
-          );
-        })}
-      </div>
-      <div className="flex justify-end pt-6">
-        <button
-  type="button"
-  onClick={goToNextStep}
-  className="text-blue-600 font-bold text-lg hover:underline mx-auto block"
->
-  Next
-</button>
-      </div>
-    </div>
-  );
-    
-case "Logo":
-  return (
-    <div>
-      <h3 className="text-xl font-semibold mb-4"> Logo</h3>
-      <img
-        src={Upload}
-        alt="Upload preview"
-        className="w-40 h-40 object-contain mb-4 border rounded-md"
-      />
-     
-    </div>
-  );
+        return (
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Usage preference</h3>
+            <p className="text-gray-600 mb-4">How will you like to use Enum?</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {usageOptions.map((option) => {
+                const isSelected = form.usagePreferences.includes(option);
+                return (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => togglePreference(option)}
+                    className={`px-4 py-2 rounded-full border text-sm transition text-left ${
+                      isSelected
+                        ? "bg-blue-100 text-blue-700 border-blue-200"
+                        : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="flex justify-end pt-6">
+              <button
+                type="button"
+                onClick={goToNextStep}
+                className="text-blue-600 font-bold text-lg hover:underline mx-auto block"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        );
+
+      case "Logo":
+        return (
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Logo</h3>
+            <img
+              src={Upload}
+              alt="Upload preview"
+              className="w-40 h-40 object-contain mb-4 border rounded-md"
+            />
+          </div>
+        );
 
       default:
         return null;

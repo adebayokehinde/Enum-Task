@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ArrowLeftIcon = () => (
   <svg
@@ -20,6 +21,8 @@ export default function InviteTeam() {
   const [email, setEmail] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
+  const navigate = useNavigate(); // ✅
+
   const handleInvite = () => {
     console.log("Inviting emails:", email);
   };
@@ -27,6 +30,7 @@ export default function InviteTeam() {
   const handleContinue = () => {
     if (agreedToTerms) {
       console.log("Continuing to next step");
+      navigate("/dashboard"); // ✅ Navigate to dashboard
     }
   };
 

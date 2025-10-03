@@ -1,10 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/Enum_Logo_White 1.png";
-import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
-  const navigate = useNavigate();
   const baseClass = "flex items-start space-x-4 cursor-pointer hover:text-gray-300";
   const activeClass = "text-yellow-300 font-bold";
 
@@ -48,12 +46,6 @@ const Sidebar = () => {
             <p className="text-sm text-gray-200">Start collaborating with your team</p>
           </div>
         </NavLink>
-        <button
-          onClick={() => navigate("/dashboard")}
-          className="px-4 py-2 bg-blue-600 text-white rounded"
-        >
-          Dashboard
-        </button>
       </div>
     </div>
   );
