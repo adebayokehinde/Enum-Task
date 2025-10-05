@@ -4,7 +4,9 @@ import Layout from "./component/Layout";
 import LetMeetYou from "./pages/LetMeetYou";
 import AddCompany from "./pages/AddCompany";
 import InviteTeam from "./pages/InviteTeam";
-// import page from "./pages/Dashboard/page";
+import EmailVerification from "./pages/EmailVerification";
+
+// import Dashboard from "./pages/Dashboard/page";
 
 
 function App() {
@@ -13,9 +15,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="letmeetyou" element={<LetMeetYou />} />
+          <Route path="/email-verification" element={<EmailVerification />} />
           <Route path="addcompany" element={<AddCompany />} />
           <Route path="inviteteam" element={<InviteTeam />} />
-          {/* <Route path="/dashboard" element={<page />} />  */}
+
+          {/* <Route path="/dashboard" element={<Dashboard />} />  */}
         </Route>
       </Routes>
     </Router>

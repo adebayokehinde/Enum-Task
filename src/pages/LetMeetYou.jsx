@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LetMeetYou = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -12,7 +15,6 @@ const LetMeetYou = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // Load saved data from localStorage on mount
   useEffect(() => {
     const savedData = localStorage.getItem("letMeetYouForm");
     if (savedData) {
@@ -37,16 +39,18 @@ const LetMeetYou = () => {
     }
 
     console.log("Form submitted:", formData);
-
-    // Save to localStorage
     localStorage.setItem("letMeetYouForm", JSON.stringify(formData));
-
     alert("Data saved locally!");
+  };
+
+  // 🔹 Navigate to Email Verification page when clicked
+  const handleEmailVerificationClick = () => {
+    navigate("/email-verification");
   };
 
   return (
     <div className="w-full h-screen flex flex-col justify-between bg-gray-50 text-gray-800">
-      {/* Top navigation link */}
+      {/* Top Right Login Link */}
       <div className="w-full flex justify-end text-sm p-4">
         <p>
           Already on Enum?{" "}
@@ -58,7 +62,7 @@ const LetMeetYou = () => {
 
       {/* Main Content */}
       <main className="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-12 px-6 md:px-10 overflow-y-auto">
-        {/* Left Column */}
+        {/* Sidebar Steps */}
         <div className="lg:col-span-1">
           <div className="max-w-md">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -70,24 +74,25 @@ const LetMeetYou = () => {
               tools for you.
             </p>
 
-            {/* Stepper */}
             <nav className="space-y-4">
               <span className="flex items-center p-3 border-l-4 border-blue-600 font-semibold text-blue-600">
                 Basic info
               </span>
-              <span className="flex items-center p-3 border-l-4 border-transparent text-gray-500">
+              <button
+                onClick={handleEmailVerificationClick}
+                className="flex items-center p-3 border-l-4 border-transparent text-gray-500 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
+              >
                 Email verification
-              </span>
+              </button>
             </nav>
           </div>
         </div>
 
-        {/* Right Column */}
+        {/* Form Section */}
         <div className="lg:col-span-2 flex items-start justify-center">
           <div className="w-full max-w-lg bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
             <h2 className="text-xl font-semibold mb-6">Basic info</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* First Name */}
               <div>
                 <label
                   htmlFor="firstName"
@@ -107,7 +112,6 @@ const LetMeetYou = () => {
                 />
               </div>
 
-              {/* Last Name */}
               <div>
                 <label
                   htmlFor="lastName"
@@ -127,7 +131,6 @@ const LetMeetYou = () => {
                 />
               </div>
 
-              {/* Work Email */}
               <div>
                 <label
                   htmlFor="workEmail"
@@ -147,7 +150,6 @@ const LetMeetYou = () => {
                 />
               </div>
 
-              {/* Password */}
               <div>
                 <label
                   htmlFor="password"
@@ -176,7 +178,6 @@ const LetMeetYou = () => {
                 </div>
               </div>
 
-              {/* Confirm Password */}
               <div>
                 <label
                   htmlFor="confirmPassword"
@@ -207,7 +208,6 @@ const LetMeetYou = () => {
                 </div>
               </div>
 
-              {/* Next Button */}
               <div className="flex justify-end pt-4">
                 <button
                   type="submit"
