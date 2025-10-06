@@ -17,6 +17,27 @@ const LetMeetYou = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
+  // ✅ Auto redirect to mobile page when screen width < 768px
+// ✅ Auto redirect between mobile and desktop based on screen width
+useEffect(() => {
+  const handleResize = () => {
+    const currentPath = window.location.pathname
+
+    if (window.innerWidth < 768 && currentPath !== "/letmeetyoumobile") {
+      navigate("/letmeetyoumobile")
+    } 
+    else if (window.innerWidth >= 768 && currentPath !== "/letmeetyou") {
+      navigate("/letmeetyou")
+    }
+  }
+
+  handleResize() // Check on mount
+  window.addEventListener("resize", handleResize)
+
+  return () => window.removeEventListener("resize", handleResize)
+}, [navigate])
+
+
   useEffect(() => {
     const savedData = localStorage.getItem("letMeetYouForm")
     if (savedData) {
@@ -51,6 +72,7 @@ const LetMeetYou = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-gray-50 text-gray-800">
+      {/* Mobile Logo */}
       <div className="p-4 md:hidden">
         <img
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Enum_Logo_Blue-removebg-preview%202-f8lCJdv6ibCk2Z4U4vN0fPkbEOYDsP.png"
@@ -59,7 +81,7 @@ const LetMeetYou = () => {
         />
       </div>
 
-      {/* Top Right Login Link - hidden on mobile, shown on desktop */}
+      {/* Top bar (desktop only) */}
       <div className="hidden md:flex w-full justify-end text-sm p-4">
         <p>
           Already on Enum?{" "}
@@ -69,8 +91,9 @@ const LetMeetYou = () => {
         </p>
       </div>
 
-      {/* Main Content */}
+      {/* Main layout */}
       <main className="flex-grow flex flex-col lg:flex-row gap-12 px-4 md:px-6 lg:px-10 py-6 overflow-y-auto">
+        {/* Left navigation (desktop) */}
         <div className="hidden lg:block w-full lg:w-1/3 order-2 lg:order-1">
           <div className="max-w-md">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Let's meet you</h1>
@@ -93,7 +116,9 @@ const LetMeetYou = () => {
           </div>
         </div>
 
+        {/* Form section */}
         <div className="w-full lg:w-2/3 flex flex-col items-start justify-start order-1 lg:order-2">
+          {/* Header (mobile) */}
           <div className="w-full mb-6 lg:hidden">
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Let's meet you</h1>
             <p className="text-sm text-gray-600">
@@ -102,6 +127,7 @@ const LetMeetYou = () => {
             </p>
           </div>
 
+          {/* Form */}
           <div className="w-full max-w-lg bg-white p-6 md:p-8 rounded-lg md:rounded-xl border border-gray-200 shadow-sm">
             <h2 className="text-lg md:text-xl font-semibold mb-6">Basic info</h2>
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -182,6 +208,7 @@ const LetMeetYou = () => {
                 </div>
               </div>
 
+              {/* Confirm Password (desktop only) */}
               <div className="hidden lg:block">
                 <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
                   Confirm password<span className="text-red-500">*</span>
@@ -219,6 +246,7 @@ const LetMeetYou = () => {
             </form>
           </div>
 
+          {/* Footer (mobile only) */}
           <div className="w-full text-center mt-8 lg:hidden">
             <p className="text-sm text-gray-600">
               Already on Enum?{" "}

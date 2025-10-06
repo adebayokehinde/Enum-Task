@@ -5,6 +5,7 @@ import LetMeetYou from "./pages/LetMeetYou";
 import AddCompany from "./pages/AddCompany";
 import InviteTeam from "./pages/InviteTeam";
 import EmailVerification from "./pages/EmailVerification";
+import LetMeetYouMobile from "./pages/LetMeetYouMobile";
 
 import Dashboard from "./pages/DashboardPage";
 
@@ -21,6 +22,7 @@ function App() {
 
         </Route>
         <Route path="/dashboard" element={<Dashboard />} /> 
+        <Route path="/letmeetyoumobile" element={<LetMeetYouMobile />} />
       </Routes>
 
     </Router>
