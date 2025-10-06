@@ -6,7 +6,7 @@ import AddCompany from "./pages/AddCompany";
 import InviteTeam from "./pages/InviteTeam";
 import EmailVerification from "./pages/EmailVerification";
 
-// import Dashboard from "./pages/Dashboard/page";
+import Dashboard from "./pages/DashboardPage";
 
 
 function App() {
@@ -19,9 +19,10 @@ function App() {
           <Route path="addcompany" element={<AddCompany />} />
           <Route path="inviteteam" element={<InviteTeam />} />
 
-          {/* <Route path="/dashboard" element={<Dashboard />} />  */}
         </Route>
+        <Route path="/dashboard" element={<Dashboard />} /> 
       </Routes>
+
     </Router>
   );
 }
