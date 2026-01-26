@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const EmailVerification = () => {
   const [email, setEmail] = useState("");
   const [timer, setTimer] = useState(120); // 2 minutes countdown
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+
+  const navigate = useNavigate(); // Initialize navigate
 
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("letMeetYouForm"));
@@ -31,7 +34,13 @@ const EmailVerification = () => {
     e.preventDefault();
     const enteredCode = otp.join("");
     console.log("Entered OTP:", enteredCode);
+
+    // You can add real OTP validation here
+
     alert("Verification successful!");
+
+    // Redirect to AddCompany page
+    navigate("/AddCompany");
   };
 
   const minutes = Math.floor(timer / 60);
@@ -80,8 +89,8 @@ const EmailVerification = () => {
               <span className="font-semibold text-gray-900">{email}</span> to verify your email.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="flex gap-2 justify-between">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="flex gap-1 justify-between">
                 {otp.map((digit, index) => (
                   <input
                     key={index}
@@ -89,6 +98,7 @@ const EmailVerification = () => {
                     value={digit}
                     onChange={(e) => handleChange(index, e.target.value)}
                     maxLength={1}
+                    placeholder="-"
                     className="w-10 h-12 text-center text-lg border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   />
                 ))}

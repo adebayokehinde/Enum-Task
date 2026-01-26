@@ -17,27 +17,25 @@ const LetMeetYou = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
-  // ✅ Auto redirect to mobile page when screen width < 768px
-// ✅ Auto redirect between mobile and desktop based on screen width
-useEffect(() => {
-  const handleResize = () => {
-    const currentPath = window.location.pathname
+  // Handle responsive navigation
+  useEffect(() => {
+    const handleResize = () => {
+      const currentPath = window.location.pathname
 
-    if (window.innerWidth < 768 && currentPath !== "/letmeetyoumobile") {
-      navigate("/letmeetyoumobile")
-    } 
-    else if (window.innerWidth >= 768 && currentPath !== "/letmeetyou") {
-      navigate("/letmeetyou")
+      if (window.innerWidth < 768 && currentPath !== "/letmeetyoumobile") {
+        navigate("/letmeetyoumobile")
+      } 
+      else if (window.innerWidth >= 768 && currentPath !== "/letmeetyou") {
+        navigate("/letmeetyou")
+      }
     }
-  }
 
-  handleResize() // Check on mount
-  window.addEventListener("resize", handleResize)
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [navigate])
 
-  return () => window.removeEventListener("resize", handleResize)
-}, [navigate])
-
-
+  // Load saved form data from localStorage
   useEffect(() => {
     const savedData = localStorage.getItem("letMeetYouForm")
     if (savedData) {
@@ -56,18 +54,20 @@ useEffect(() => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    // Gmail validation: username can have capitals, domain must be lowercase
+    const gmailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/
+    if (!gmailRegex.test(formData.workEmail)) {
+      alert("Please enter a valid Gmail address with lowercase '@gmail.com'.")
+      return
+    }
+
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!")
       return
     }
 
-    console.log("Form submitted:", formData)
     localStorage.setItem("letMeetYouForm", JSON.stringify(formData))
-    alert("Data saved locally!")
-  }
-
-  const handleEmailVerificationClick = () => {
-    navigate("/email-verification")
+    navigate("/email-verification") // Navigate on Next
   }
 
   return (
@@ -96,7 +96,9 @@ useEffect(() => {
         {/* Left navigation (desktop) */}
         <div className="hidden lg:block w-full lg:w-1/3 order-2 lg:order-1">
           <div className="max-w-md">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Let's meet you</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Let's meet <br />you
+            </h1>
             <p className="text-gray-600 mb-8">
               Just a few details to get you started — including verifying your email — so we can personalize your setup
               and unlock the right tools for you.
@@ -106,12 +108,11 @@ useEffect(() => {
               <span className="flex items-center p-3 border-l-4 border-blue-600 font-semibold text-blue-600">
                 Basic info
               </span>
-              <button
-                onClick={handleEmailVerificationClick}
-                className="flex items-center p-3 border-l-4 border-transparent text-gray-500 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
+              <span
+                className="flex items-center p-3 border-l-4 border-transparent text-gray-400 cursor-not-allowed"
               >
                 Email verification
-              </button>
+              </span>
             </nav>
           </div>
         </div>
@@ -174,7 +175,7 @@ useEffect(() => {
                   type="email"
                   name="workEmail"
                   id="workEmail"
-                  placeholder="Enter hub name"
+                  placeholder="Enter your Gmail address"
                   value={formData.workEmail}
                   onChange={handleChange}
                   required
@@ -192,7 +193,7 @@ useEffect(() => {
                     type={showPassword ? "text" : "password"}
                     name="password"
                     id="password"
-                    placeholder="Enter hub name"
+                    placeholder="Enter password"
                     value={formData.password}
                     onChange={handleChange}
                     required

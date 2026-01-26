@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Upload from "../assets/Upload Field.png";
 
 export default function AddCompany() {
   const [form, setForm] = useState({
@@ -10,6 +9,7 @@ export default function AddCompany() {
     companySize: "",
     description: "",
     usagePreferences: [],
+    logo: "", // Logo state
   });
 
   const [activeStep, setActiveStep] = useState("Details");
@@ -184,7 +184,9 @@ export default function AddCompany() {
           <div>
             <h3 className="text-xl font-semibold mb-4">Usage preference</h3>
             <p className="text-gray-600 mb-4">How will you like to use Enum?</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+            {/* Scrollable container */}
+            <div className="h-80 overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 gap-3 border border-gray-300 p-2 rounded-md">
               {usageOptions.map((option) => {
                 const isSelected = form.usagePreferences.includes(option);
                 return (
@@ -192,10 +194,10 @@ export default function AddCompany() {
                     key={option}
                     type="button"
                     onClick={() => togglePreference(option)}
-                    className={`px-4 py-2 rounded-full border text-sm transition text-left ${
+                    className={`px-4 py-2 rounded-full text-sm transition text-left w-full ${
                       isSelected
-                        ? "bg-blue-100 text-blue-700 border-blue-200"
-                        : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                        ? "bg-blue-100 text-blue-700"
+                        : "bg-[#F2F4F7] text-gray-700 hover:bg-gray-200"
                     }`}
                   >
                     {option}
@@ -203,6 +205,7 @@ export default function AddCompany() {
                 );
               })}
             </div>
+
             <div className="flex justify-end pt-6">
               <button
                 type="button"
@@ -219,11 +222,50 @@ export default function AddCompany() {
         return (
           <div>
             <h3 className="text-xl font-semibold mb-4">Logo</h3>
-            <img
-              src={Upload}
-              alt="Upload preview"
-              className="w-40 h-40 object-contain mb-4 border rounded-md"
-            />
+
+            <div
+              className="w-40 h-40 flex items-center justify-center mb-4 border rounded-md bg-gray-100 hover:bg-gray-200 transition relative cursor-pointer"
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => {
+                e.preventDefault();
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith("image/")) {
+                  const reader = new FileReader();
+                  reader.onload = (event) => {
+                    setForm((prev) => ({ ...prev, logo: event.target.result }));
+                  };
+                  reader.readAsDataURL(file);
+                }
+              }}
+            >
+              {form.logo ? (
+                <img
+                  src={form.logo}
+                  alt="Company Logo"
+                  className="w-full h-full object-contain rounded-md"
+                />
+              ) : (
+                <span className="text-gray-500 text-center">
+                  Click or drag image here
+                </span>
+              )}
+
+              <input
+                type="file"
+                accept="image/*"
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                      setForm((prev) => ({ ...prev, logo: event.target.result }));
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                }}
+              />
+            </div>
           </div>
         );
 
@@ -239,18 +281,25 @@ export default function AddCompany() {
         <div className="p-8 border-r">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Add company</h2>
           <p className="text-gray-600 mb-6">
-            Nice work, David. Just one more step — Now, let’s complete your setup with your organization’s info.
+            Nice work, <b>David</b>. Just one more step — Now, let’s complete your setup with your organization’s info.
           </p>
-          <ul className="space-y-2 text-gray-700">
+          <ul className="space-y-4">
             {["Details", "Short description", "Usage preference", "Logo"].map((step) => (
               <li
                 key={step}
                 onClick={() => setActiveStep(step)}
-                className={`font-semibold cursor-pointer ${
-                  activeStep === step ? "text-blue-600" : "hover:text-blue-500"
-                }`}
+                className="cursor-pointer flex items-center"
               >
-                • {step}
+                <span
+                  className={`w-1 h-6 mr-3 rounded ${
+                    activeStep === step ? "bg-blue-600" : "bg-transparent"
+                  }`}
+                ></span>
+                <span
+                  className={`${activeStep === step ? "text-blue-600 font-semibold" : "text-gray-700"}`}
+                >
+                  {step}
+                </span>
               </li>
             ))}
           </ul>
