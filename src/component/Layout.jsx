@@ -10,11 +10,11 @@ const Layout = () => {
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
+      {/* Sidebar (fixed) */}
       <Sidebar />
 
-      {/* Page content */}
-      <div className="flex-1 flex flex-col">
+      {/* Page content shifted to the right */}
+      <div className="flex-1 flex flex-col ml-64">
         {/* Main content */}
         <div className="flex-1 p-6 overflow-auto">
           <Outlet />

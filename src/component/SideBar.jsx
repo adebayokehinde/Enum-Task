@@ -22,7 +22,8 @@ const steps = [
 
 const Sidebar = () => {
   return (
-    <div className="h-screen w-64 bg-blue-600 text-white flex flex-col p-6">
+<div className="fixed top-0 left-0 h-screen w-64 bg-blue-600 text-white flex flex-col p-6">
+
    
       <div className="mb-12">
         <img src={logo} alt="Logo" className="w-20 h-5" />
