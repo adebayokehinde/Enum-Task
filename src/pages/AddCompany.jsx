@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import placeholderLogo from "../assets/upload-placeholder.png";
 
 export default function AddCompany() {
   const [form, setForm] = useState({
@@ -9,12 +11,12 @@ export default function AddCompany() {
     companySize: "",
     description: "",
     usagePreferences: [],
-    logo: "", // Logo state
+    logo: "",
   });
 
   const [activeStep, setActiveStep] = useState("Details");
+  const navigate = useNavigate();
 
-  // Load saved form from localStorage
   useEffect(() => {
     const savedForm = localStorage.getItem("addCompanyForm");
     const savedStep = localStorage.getItem("addCompanyActiveStep");
@@ -23,7 +25,6 @@ export default function AddCompany() {
     if (savedStep) setActiveStep(savedStep);
   }, []);
 
-  // Save form and step to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("addCompanyForm", JSON.stringify(form));
     localStorage.setItem("addCompanyActiveStep", activeStep);
@@ -43,7 +44,7 @@ export default function AddCompany() {
 
   const togglePreference = (option) => {
     setForm((prev) => {
-      const current = prev.usagePreferences || [];
+      const current = prev.usagePreferences;
       const updated = current.includes(option)
         ? current.filter((item) => item !== option)
         : [...current, option];
@@ -55,26 +56,29 @@ export default function AddCompany() {
     switch (activeStep) {
       case "Details":
         return (
-          <form className="space-y-4">
+          <form className="space-y-4 flex-1">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Company name*</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Company name*
+              </label>
               <input
                 type="text"
                 name="companyName"
                 value={form.companyName}
                 onChange={handleChange}
-                placeholder="Enter company name"
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 block w-full border border-gray-300 rounded-md p-2"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Industry</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Industry
+              </label>
               <select
                 name="industry"
                 value={form.industry}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 block w-full border border-gray-300 rounded-md p-2"
               >
                 <option value="">Select industry</option>
                 <option value="tech">Technology</option>
@@ -85,34 +89,40 @@ export default function AddCompany() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Website</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Website
+              </label>
               <input
                 type="url"
                 name="website"
                 value={form.website}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 block w-full border border-gray-300 rounded-md p-2"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Site name</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Site name
+              </label>
               <input
                 type="text"
                 name="siteName"
                 value={form.siteName}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 block w-full border border-gray-300 rounded-md p-2"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Company size</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Company size
+              </label>
               <select
                 name="companySize"
                 value={form.companySize}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 block w-full border border-gray-300 rounded-md p-2"
               >
                 <option value="">Select size</option>
                 <option value="1-10">1–10 employees</option>
@@ -126,7 +136,7 @@ export default function AddCompany() {
               <button
                 type="button"
                 onClick={goToNextStep}
-                className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+                className="text-blue-600 font-semibold hover:underline"
               >
                 Next
               </button>
@@ -136,26 +146,27 @@ export default function AddCompany() {
 
       case "Short description":
         return (
-          <div>
+          <div className="flex-1">
             <h3 className="text-xl font-semibold mb-4">Short description</h3>
-            <label className="block text-sm text-gray-700 mb-2">Give a short description of your company</label>
+
             <textarea
               name="description"
               rows="6"
               maxLength={1000}
               value={form.description}
               onChange={handleChange}
-              placeholder="Enter text here"
-              className="w-full border border-gray-300 rounded-md p-3 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full h-64 border border-gray-300 rounded-md p-3 resize-none"
             />
+
             <div className="text-right text-sm text-gray-500 mt-1">
               {form.description.length}/1000 characters
             </div>
+
             <div className="flex justify-end pt-4">
               <button
                 type="button"
                 onClick={goToNextStep}
-                className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+                className="text-blue-600 font-semibold hover:underline"
               >
                 Next
               </button>
@@ -181,12 +192,10 @@ export default function AddCompany() {
         ];
 
         return (
-          <div>
+          <div className="flex-1">
             <h3 className="text-xl font-semibold mb-4">Usage preference</h3>
-            <p className="text-gray-600 mb-4">How will you like to use Enum?</p>
 
-            {/* Scrollable container */}
-            <div className="h-80 overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 gap-3 border border-gray-300 p-2 rounded-md">
+            <div className="h-80 overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 gap-3">
               {usageOptions.map((option) => {
                 const isSelected = form.usagePreferences.includes(option);
                 return (
@@ -194,10 +203,10 @@ export default function AddCompany() {
                     key={option}
                     type="button"
                     onClick={() => togglePreference(option)}
-                    className={`px-4 py-2 rounded-full text-sm transition text-left w-full ${
+                    className={`px-4 py-2 rounded-full text-sm text-left ${
                       isSelected
                         ? "bg-blue-100 text-blue-700"
-                        : "bg-[#F2F4F7] text-gray-700 hover:bg-gray-200"
+                        : "bg-gray-100 text-gray-700"
                     }`}
                   >
                     {option}
@@ -210,7 +219,7 @@ export default function AddCompany() {
               <button
                 type="button"
                 onClick={goToNextStep}
-                className="text-blue-600 font-bold text-lg hover:underline mx-auto block"
+                className="text-blue-600 font-semibold hover:underline"
               >
                 Next
               </button>
@@ -220,51 +229,38 @@ export default function AddCompany() {
 
       case "Logo":
         return (
-          <div>
+          <div className="flex-1 flex flex-col">
             <h3 className="text-xl font-semibold mb-4">Logo</h3>
 
-            <div
-              className="w-40 h-40 flex items-center justify-center mb-4 border rounded-md bg-gray-100 hover:bg-gray-200 transition relative cursor-pointer"
-              onDragOver={(e) => e.preventDefault()}
-              onDrop={(e) => {
-                e.preventDefault();
-                const file = e.dataTransfer.files[0];
-                if (file && file.type.startsWith("image/")) {
-                  const reader = new FileReader();
-                  reader.onload = (event) => {
-                    setForm((prev) => ({ ...prev, logo: event.target.result }));
-                  };
-                  reader.readAsDataURL(file);
-                }
-              }}
-            >
-              {form.logo ? (
-                <img
-                  src={form.logo}
-                  alt="Company Logo"
-                  className="w-full h-full object-contain rounded-md"
-                />
-              ) : (
-                <span className="text-gray-500 text-center">
-                  Click or drag image here
-                </span>
-              )}
+            <div className="w-40 h-40 border rounded-md bg-gray-100 relative mb-6 overflow-hidden">
+              <img
+                src={form.logo || placeholderLogo}
+                alt="Company logo"
+                className="w-full h-full object-cover"
+              />
 
               <input
                 type="file"
                 accept="image/*"
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                className="absolute inset-0 opacity-0 cursor-pointer"
                 onChange={(e) => {
-                  if (e.target.files && e.target.files[0]) {
-                    const file = e.target.files[0];
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                      setForm((prev) => ({ ...prev, logo: event.target.result }));
-                    };
-                    reader.readAsDataURL(file);
-                  }
+                  const file = e.target.files[0];
+                  if (!file) return;
+                  const reader = new FileReader();
+                  reader.onload = (ev) =>
+                    setForm((prev) => ({ ...prev, logo: ev.target.result }));
+                  reader.readAsDataURL(file);
                 }}
               />
+            </div>
+
+            <div className="mt-auto flex justify-end">
+              <span
+                onClick={() => navigate("/InviteTeam")}
+                className="text-blue-600 font-semibold cursor-pointer hover:underline"
+              >
+                Next
+              </span>
             </div>
           </div>
         );
@@ -275,38 +271,49 @@ export default function AddCompany() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-      <div className="bg-white shadow-lg rounded-lg max-w-5xl w-full grid grid-cols-1 md:grid-cols-2">
+    <div className="h-screen   flex items-center justify-center p-6 bg-gray-50">
+      {/* MAIN CONTAINER */}
+      <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 bg-gray-50 rounded-lg shadow-lg min-h-[620px]">
         {/* Left Panel */}
-        <div className="p-8 border-r">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Add company</h2>
-          <p className="text-gray-600 mb-6">
-            Nice work, <b>David</b>. Just one more step — Now, let’s complete your setup with your organization’s info.
+        <div className="p-8 border-r bg-gray-50">
+          <h2 className="text-2xl font-bold mb-6">Add company</h2>
+          <p className="text-gray-600 mb-8">
+            Nice work, <b>David</b>. Just one more step — <br />
+            Now, let’s complete your setup with your organization’s info.
           </p>
+
           <ul className="space-y-4">
-            {["Details", "Short description", "Usage preference", "Logo"].map((step) => (
-              <li
-                key={step}
-                onClick={() => setActiveStep(step)}
-                className="cursor-pointer flex items-center"
-              >
-                <span
-                  className={`w-1 h-6 mr-3 rounded ${
-                    activeStep === step ? "bg-blue-600" : "bg-transparent"
-                  }`}
-                ></span>
-                <span
-                  className={`${activeStep === step ? "text-blue-600 font-semibold" : "text-gray-700"}`}
+            {["Details", "Short description", "Usage preference", "Logo"].map(
+              (step) => (
+                <li
+                  key={step}
+                  onClick={() => setActiveStep(step)}
+                  className="cursor-pointer flex items-center"
                 >
-                  {step}
-                </span>
-              </li>
-            ))}
+                  <span
+                    className={`w-1 h-6 mr-3 ${
+                      activeStep === step ? "bg-blue-600" : "bg-transparent"
+                    }`}
+                  />
+                  <span
+                    className={
+                      activeStep === step
+                        ? "text-blue-600 font-semibold"
+                        : "text-gray-700"
+                    }
+                  >
+                    {step}
+                  </span>
+                </li>
+              )
+            )}
           </ul>
         </div>
 
         {/* Right Panel */}
-        <div className="p-8">{renderStepContent()}</div>
+        <div className="p-8 bg-white rounded-r-lg flex flex-col">
+          {renderStepContent()}
+        </div>
       </div>
     </div>
   );

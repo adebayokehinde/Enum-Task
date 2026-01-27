@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ import this
+import { useNavigate } from "react-router-dom";
 
 export default function InviteTeam() {
   const [emailList, setEmailList] = useState([]);
   const [emailInput, setEmailInput] = useState("");
   const [agreed, setAgreed] = useState(false);
 
-  const navigate = useNavigate(); // ✅ create navigation hook
+  const navigate = useNavigate();
 
   const handleAddEmail = () => {
     const newEmails = emailInput
@@ -27,13 +27,12 @@ export default function InviteTeam() {
   const handleContinue = () => {
     if (agreed) {
       console.log("Continuing setup with emails:", emailList);
-      alert("Team invited successfully!");
-      navigate("/dashboard"); // ✅ redirect to dashboard
+      navigate("/dashboard");
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gray-50 text-gray-800">
+    <div className="h-65 flex flex-col bg-gray-50 text-gray-800">
       {/* Top right login link */}
       <div className="flex justify-end p-6 text-sm">
         <p>
@@ -46,16 +45,25 @@ export default function InviteTeam() {
 
       {/* Main section */}
       <main className="flex flex-col items-center justify-center flex-grow px-6">
-        <div className="max-w-3xl w-full flex flex-col md:flex-row items-start gap-12">
+        <div className="max-w-4xl w-full flex flex-col md:flex-row items-start gap-12">
           {/* Left section */}
           <div className="flex-1">
             <h1 className="text-3xl font-bold mb-3 text-gray-900">
               Invite your team
             </h1>
-            <p className="text-gray-600">
-              Want help managing things? Invite teammates now or add them
-              anytime later.
+            <p className="text-gray-600 mb-4">
+              Want help managing things? Invite teammates now or add them anytime later.
             </p>
+
+            {/* Invite count box */}
+            {emailList.length > 0 && (
+              <div
+                className="flex items-center justify-center text-blue-600 font-semibold rounded-lg border border-blue-600"
+                style={{ width: "210px", height: "36px" }}
+              >
+                {emailList.length} invite{emailList.length === 1 ? "" : "s"} sent
+              </div>
+            )}
           </div>
 
           {/* Right section (form) */}
@@ -111,7 +119,7 @@ export default function InviteTeam() {
 
       {/* Bottom section */}
       <footer className="border-t border-gray-200 mt-10 py-6 px-6 flex justify-between items-center">
-        <div className="flex items-center">
+        <div className="flex items-center bg-white">
           <input
             type="checkbox"
             id="agree"

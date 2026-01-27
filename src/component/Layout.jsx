@@ -9,7 +9,7 @@ const Layout = () => {
   const activeIndex = steps.indexOf(location.pathname);
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex h-screen">
       {/* Sidebar (fixed) */}
       <Sidebar />
 
@@ -21,7 +21,7 @@ const Layout = () => {
         </div>
 
         {/* Bottom page indicator */}
-        <div className="flex justify-center items-center gap-8 mb-6">
+        <div className="flex justify-center items-center gap-8 ">
           {steps.map((step, index) => (
             <div key={step} className="relative w-[88px] h-2">
               {/* Gray line */}

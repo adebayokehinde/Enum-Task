@@ -71,7 +71,7 @@ const LetMeetYou = () => {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-col bg-gray-50 text-gray-800">
+    <div className="w-full h-screen flex flex-col justify-between bg-gray-50 text-gray-800 relative">
       {/* Mobile Logo */}
       <div className="p-4 md:hidden">
         <img
@@ -237,12 +237,13 @@ const LetMeetYou = () => {
 
               {/* Submit Button */}
               <div className="flex justify-end pt-4">
-                <button
+              <button
                   type="submit"
-                  className="py-2 px-8 rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 font-medium"
+                  className="text-blue-600 font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Next
-                </button>
+              </button>
+
               </div>
             </form>
           </div>

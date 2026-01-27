@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const EmailVerification = () => {
   const [email, setEmail] = useState("");
-  const [timer, setTimer] = useState(120); // 2 minutes countdown
+  const [timer, setTimer] = useState(120);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [toast, setToast] = useState(""); // For non-blocking message
 
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("letMeetYouForm"));
-    if (savedData && savedData.workEmail) {
-      setEmail(savedData.workEmail);
-    }
+    if (savedData && savedData.workEmail) setEmail(savedData.workEmail);
   }, []);
 
   useEffect(() => {
@@ -33,21 +32,23 @@ const EmailVerification = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const enteredCode = otp.join("");
-    console.log("Entered OTP:", enteredCode);
 
-    // You can add real OTP validation here
-
-    alert("Verification successful!");
-
-    // Redirect to AddCompany page
-    navigate("/AddCompany");
+    // Instead of alert(), use a toast
+    setToast("Verification successful!");
+    
+    // Auto-hide after 2 seconds
+    setTimeout(() => {
+      setToast("");
+      navigate("/AddCompany");
+    }, 2000);
   };
 
   const minutes = Math.floor(timer / 60);
   const seconds = String(timer % 60).padStart(2, "0");
 
   return (
-    <div className="w-full h-screen flex flex-col justify-between bg-gray-50 text-gray-800">
+    <div className="w-full h-screen flex flex-col justify-between bg-gray-50 text-gray-800 relative">
+      {/* Top right login link */}
       <div className="w-full flex justify-end text-sm p-4">
         <p>
           Already on Enum?{" "}
@@ -57,18 +58,16 @@ const EmailVerification = () => {
         </p>
       </div>
 
+      {/* Main section */}
       <main className="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-12 px-6 md:px-10 overflow-y-auto">
         {/* Left Stepper */}
         <div className="lg:col-span-1">
           <div className="max-w-md">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Let’s meet you
-            </h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Let’s meet you</h1>
             <p className="text-gray-600 mb-8">
               Just a few details to get you started — including verifying your email — 
               so we can personalize your setup and unlock the right tools for you.
             </p>
-
             <nav className="space-y-4">
               <span className="flex items-center p-3 border-l-4 border-transparent text-gray-500">
                 Basic info
@@ -107,9 +106,7 @@ const EmailVerification = () => {
               <p className="text-blue-600 text-sm mt-2">{minutes}:{seconds}</p>
 
               <div className="mt-6">
-                <h3 className="font-semibold text-gray-800 mb-2">
-                  Didn’t receive the email?
-                </h3>
+                <h3 className="font-semibold text-gray-800 mb-2">Didn’t receive the email?</h3>
                 <ul className="list-decimal list-inside text-gray-600 text-sm space-y-1">
                   <li>Check spam or promotions.</li>
                   <li>Confirm your email is correct.</li>
@@ -121,16 +118,38 @@ const EmailVerification = () => {
                 </p>
               </div>
 
-              <button
-                type="submit"
-                className="mt-6 w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-              >
-                Verify
-              </button>
+              <div className="flex justify-end pt-4">
+                <button
+                  type="submit"
+                  className="text-blue-600 font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  Verify
+                </button>
+              </div>
             </form>
           </div>
         </div>
       </main>
+
+      {/* Toast Message */}
+      {toast && (
+        <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-6 py-3 rounded-md shadow-lg animate-fadeInOut">
+          {toast}
+        </div>
+      )}
+
+      {/* Tailwind Animation */}
+      <style>{`
+        @keyframes fadeInOut {
+          0% { opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        .animate-fadeInOut {
+          animation: fadeInOut 2s forwards;
+        }
+      `}</style>
     </div>
   );
 };

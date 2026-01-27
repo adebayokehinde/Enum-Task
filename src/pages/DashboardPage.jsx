@@ -136,13 +136,60 @@ export default function Dashboard() {
   }))
 
   const calendarDays = [
-    [28, 27, 28, 29, 30, 31, 1],
-    [2, 3, 4, 5, 6, 7, 8],
-    [9, 10, 11, 12, 13, 14, 15],
-    [16, 17, 18, 19, 20, 21, 22],
-    [23, 24, 25, 26, 27, 28, 29],
-    [30, 31, 1, 2, 3, 4, 5],
+    [
+      { day: 28, isCurrentMonth: false },
+      { day: 29, isCurrentMonth: false },
+      { day: 30, isCurrentMonth: false },
+      { day: 31, isCurrentMonth: false },
+      { day: 1, isCurrentMonth: true },
+    ],
+    [
+      { day: 2, isCurrentMonth: true },
+      { day: 3, isCurrentMonth: true },
+      { day: 4, isCurrentMonth: true },
+      { day: 5, isCurrentMonth: true },
+      { day: 6, isCurrentMonth: true },
+      { day: 7, isCurrentMonth: true },
+      { day: 8, isCurrentMonth: true },
+    ],
+    [
+      { day: 9, isCurrentMonth: true },
+      { day: 10, isCurrentMonth: true },
+      { day: 11, isCurrentMonth: true },
+      { day: 12, isCurrentMonth: true },
+      { day: 13, isCurrentMonth: true },
+      { day: 14, isCurrentMonth: true },
+      { day: 15, isCurrentMonth: true },
+    ],
+    [
+      { day: 16, isCurrentMonth: true },
+      { day: 17, isCurrentMonth: true },
+      { day: 18, isCurrentMonth: true },
+      { day: 19, isCurrentMonth: true },
+      { day: 20, isCurrentMonth: true },
+      { day: 21, isCurrentMonth: true },
+      { day: 22, isCurrentMonth: true },
+    ],
+    [
+      { day: 23, isCurrentMonth: true },
+      { day: 24, isCurrentMonth: true },
+      { day: 25, isCurrentMonth: true },
+      { day: 26, isCurrentMonth: true },
+      { day: 27, isCurrentMonth: true },
+      { day: 28, isCurrentMonth: true },
+      { day: 29, isCurrentMonth: true },
+    ],
+    [
+      { day: 30, isCurrentMonth: true },
+      { day: 31, isCurrentMonth: true },
+      { day: 1, isCurrentMonth: false },
+      { day: 2, isCurrentMonth: false },
+      { day: 3, isCurrentMonth: false },
+      { day: 4, isCurrentMonth: false },
+      { day: 5, isCurrentMonth: false },
+    ],
   ]
+  
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -577,23 +624,24 @@ export default function Dashboard() {
               </div>
 
               <div className="grid grid-cols-7 gap-1">
-                {calendarDays.flat().map((day, index) => (
-                  <button
-                    key={index}
-                    className={`aspect-square flex items-center justify-center text-sm rounded-lg transition-colors ${
-                      day === selectedDate
-                        ? "bg-blue-600 text-white font-medium"
-                        : day > 27 && index < 7
-                          ? "text-gray-400"
-                          : day < 7 && index > 27
-                            ? "text-gray-400"
-                            : "text-gray-700 hover:bg-gray-200"
+              {calendarDays.flat().map((item, index) => (
+                <button
+                  key={index}
+                  disabled={!item.isCurrentMonth}
+                  onClick={() => item.isCurrentMonth && setSelectedDate(item.day)}
+                  className={`aspect-square flex items-center justify-center text-sm rounded-lg transition-colors
+                    ${
+                      !item.isCurrentMonth
+                        ? "text-gray-400 cursor-default"
+                        : selectedDate === item.day
+                          ? "bg-blue-600 text-white font-medium"
+                          : "text-gray-700 hover:bg-gray-200"
                     }`}
-                    onClick={() => setSelectedDate(day)}
-                  >
-                    {day}
-                  </button>
-                ))}
+                >
+                  {item.day}
+                </button>
+              ))}
+
               </div>
             </div>
 
@@ -658,23 +706,25 @@ export default function Dashboard() {
           </div>
 
           <div className="grid grid-cols-7 gap-1">
-            {calendarDays.flat().map((day, index) => (
-              <button
-                key={index}
-                className={`aspect-square flex items-center justify-center text-sm rounded-lg transition-colors ${
-                  day === selectedDate
-                    ? "bg-blue-600 text-white font-medium"
-                    : day > 27 && index < 7
-                      ? "text-gray-400"
-                      : day < 7 && index > 27
-                        ? "text-gray-400"
-                        : "text-gray-700 hover:bg-gray-200"
-                }`}
-                onClick={() => setSelectedDate(day)}
-              >
-                {day}
-              </button>
-            ))}
+          {calendarDays.flat().map((item, index) => (
+            <button
+              key={index}
+              disabled={!item.isCurrentMonth}
+              onClick={() => item.isCurrentMonth && setSelectedDate(item.day)}
+              className={`aspect-square flex items-center justify-center text-sm rounded-lg transition-colors
+              ${
+                  !item.isCurrentMonth
+                    ? "text-gray-400 cursor-default"
+                    : selectedDate === item.day
+                      ? "bg-blue-600 text-white font-medium"
+                      : "text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              {item.day}
+            </button>
+          ))}
+
+
           </div>
         </div>
 
