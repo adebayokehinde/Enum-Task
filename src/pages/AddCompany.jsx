@@ -276,7 +276,7 @@ export default function AddCompany() {
       <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 bg-gray-50 rounded-lg shadow-lg min-h-[620px]">
         {/* Left Panel */}
         <div className="p-8 border-r bg-gray-50">
-          <h2 className="text-2xl font-bold mb-6">Add company</h2>
+          <h2 className="text-2xl font-bold mb-6">Add <br/> company</h2>
           <p className="text-gray-600 mb-8">
             Nice work, <b>David</b>. Just one more step — <br />
             Now, let’s complete your setup with your organization’s info.
