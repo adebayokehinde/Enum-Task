@@ -71,195 +71,202 @@ const LetMeetYou = () => {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col justify-between bg-gray-50 text-gray-800 relative">
-      {/* Mobile Logo */}
-      <div className="p-4 md:hidden">
-        <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Enum_Logo_Blue-removebg-preview%202-f8lCJdv6ibCk2Z4U4vN0fPkbEOYDsP.png"
-          alt="Enum Logo"
-          className="h-6"
-        />
+    <div className="min-h-screen flex items-center justify-center  p-4">
+      <div className="w-[884px] h-[634px] bg-gray-50 text-gray-800  flex overflow relative  rounded-xl">
+      <div className="mb-6">
+        <button
+          type="button"
+          onClick={() => navigate(-1)} // go back to previous page
+          className="flex items-center text-black text-sm font-medium hover:text-gray-700"
+        >
+          <span className="mr-2 text-xl">←</span> {/* small black arrow */}
+          
+        </button>
       </div>
 
-      {/* Top bar (desktop only) */}
-      <div className="hidden md:flex w-full justify-end text-sm p-4">
-        <p>
-          Already on Enum?{" "}
-          <a href="#" className="font-semibold text-blue-600 hover:underline">
-            Log in
-          </a>
-        </p>
-      </div>
-
-      {/* Main layout */}
-      <main className="flex-grow flex flex-col lg:flex-row gap-12 px-4 md:px-6 lg:px-10 py-6 overflow-y-auto">
-        {/* Left navigation (desktop) */}
-        <div className="hidden lg:block w-full lg:w-1/3 order-2 lg:order-1">
-          <div className="max-w-md">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Let's meet <br />you
-            </h1>
-            <p className="text-gray-600 mb-8">
-              Just a few details to get you started — including verifying your email — so we can personalize your setup
-              and unlock the right tools for you.
-            </p>
-
-            <nav className="space-y-4">
-              <span className="flex items-center p-3 border-l-4 border-blue-600 font-semibold text-blue-600">
-                Basic info
-              </span>
-              <span
-                className="flex items-center p-3 border-l-4 border-transparent text-gray-400 cursor-not-allowed"
-              >
-                Email verification
-              </span>
-            </nav>
-          </div>
+        {/* Mobile Logo */}
+        <div className="p-4 md:hidden">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Enum_Logo_Blue-removebg-preview%202-f8lCJdv6ibCk2Z4U4vN0fPkbEOYDsP.png"
+            alt="Enum Logo"
+            className="h-6"
+          />
         </div>
 
-        {/* Form section */}
-        <div className="w-full lg:w-2/3 flex flex-col items-start justify-start order-1 lg:order-2">
-          {/* Header (mobile) */}
-          <div className="w-full mb-6 lg:hidden">
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Let's meet you</h1>
-            <p className="text-sm text-gray-600">
-              Just a few details to get you started — including verifying your email — so we can personalize your setup
-              and unlock the right tools for you.
-            </p>
-          </div>
+        {/* Top bar (desktop only) */}
 
-          {/* Form */}
-          <div className="w-full max-w-lg bg-white p-6 md:p-8 rounded-lg md:rounded-xl border border-gray-200 shadow-sm">
-            <h2 className="text-lg md:text-xl font-semibold mb-6">Basic info</h2>
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {/* First Name */}
-              <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                  First name<span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="firstName"
-                  id="firstName"
-                  placeholder="Enter hub name"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                />
-              </div>
 
-              {/* Last Name */}
-              <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-                  Last name<span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="lastName"
-                  id="lastName"
-                  placeholder="Enter hub name"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                />
-              </div>
+        {/* Main layout */}
+        <main className="flex-grow flex flex-col lg:flex-row gap-12 px-4 md:px-6 lg:px-10 py-6 overflow-y-auto">
+          {/* Left navigation (desktop) */}
+          <div className="hidden lg:block w-full lg:w-1/3 order-2 lg:order-1">
+            <div className="max-w-md">
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                Let's meet <br />you
+              </h1>
+              <p className="text-gray-600 mb-8">
+                Just a few details to get you started — including verifying your email — so we can personalize your setup
+                and unlock the right tools for you.
+              </p>
 
-              {/* Work Email */}
-              <div>
-                <label htmlFor="workEmail" className="block text-sm font-medium text-gray-700 mb-1">
-                  Work email<span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  name="workEmail"
-                  id="workEmail"
-                  placeholder="Enter your Gmail address"
-                  value={formData.workEmail}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                />
-              </div>
-
-              {/* Password */}
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                  Password<span className="text-red-500">*</span>
-                </label>
-                <div className="relative mt-1">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    id="password"
-                    placeholder="Enter password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                    className="block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 px-3 text-sm text-gray-500 hover:text-blue-600"
-                  >
-                    {showPassword ? "Hide" : "Show"}
-                  </button>
-                </div>
-              </div>
-
-              {/* Confirm Password (desktop only) */}
-              <div className="hidden lg:block">
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
-                  Confirm password<span className="text-red-500">*</span>
-                </label>
-                <div className="relative mt-1">
-                  <input
-                    type={showConfirmPassword ? "text" : "password"}
-                    name="confirmPassword"
-                    id="confirmPassword"
-                    placeholder="Enter password"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    required
-                    className="block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute inset-y-0 right-0 px-3 text-sm text-gray-500 hover:text-blue-600"
-                  >
-                    {showConfirmPassword ? "Hide" : "Show"}
-                  </button>
-                </div>
-              </div>
-
-              {/* Submit Button */}
-              <div className="flex justify-end pt-4">
-              <button
-                  type="submit"
-                  className="text-blue-600 font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500"
+              <nav className="space-y-4">
+                <span className="flex items-center p-3 border-l-4 border-blue-600 font-semibold text-blue-600">
+                  Basic info
+                </span>
+                <span
+                  className="flex items-center p-3 border-l-4 border-transparent text-gray-400 cursor-not-allowed"
                 >
-                  Next
-              </button>
-
-              </div>
-            </form>
+                  Email verification
+                </span>
+              </nav>
+            </div>
           </div>
 
-          {/* Footer (mobile only) */}
-          <div className="w-full text-center mt-8 lg:hidden">
-            <p className="text-sm text-gray-600">
-              Already on Enum?{" "}
-              <a href="#" className="font-semibold text-blue-600 hover:underline">
-                Log in
-              </a>
-            </p>
+          {/* Form section */}
+          <div className="w-full lg:w-2/3 flex flex-col items-start justify-start order-1 lg:order-2 flex-1 bg-gray-50 p-10 flex flex-col">
+            {/* Header (mobile) */}
+            <div className="w-full mb-6 lg:hidden">
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">Let's meet you</h1>
+              <p className="text-sm text-gray-600">
+                Just a few details to get you started — including verifying your email — so we can personalize your setup
+                and unlock the right tools for you.
+              </p>
+            </div>
+
+            {/* Form */}
+            <div className="w-full max-w-lg bg-white p-6 md:p-8 rounded-lg md:rounded-xl">
+              <h2 className="text-lg md:text-xl font-semibold mb-6">Basic info</h2>
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* First Name */}
+                <div>
+                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+                    First name<span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    placeholder="Enter hub name"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    required
+                    className="mt-1 block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  />
+                </div>
+
+                {/* Last Name */}
+                <div>
+                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+                    Last name<span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    placeholder="Enter hub name"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    required
+                    className="mt-1 block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  />
+                </div>
+
+                {/* Work Email */}
+                <div>
+                  <label htmlFor="workEmail" className="block text-sm font-medium text-gray-700 mb-1">
+                    Work email<span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    name="workEmail"
+                    id="workEmail"
+                    placeholder="Enter your Gmail address"
+                    value={formData.workEmail}
+                    onChange={handleChange}
+                    required
+                    className="mt-1 block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  />
+                </div>
+
+                {/* Password */}
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                    Password<span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative mt-1">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      id="password"
+                      placeholder="Enter password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                      className="block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-0 px-3 text-sm text-gray-500 hover:text-blue-600"
+                    >
+                      {showPassword ? "Hide" : "Show"}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Confirm Password (desktop only) */}
+                <div className="hidden lg:block">
+                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+                    Confirm password<span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative mt-1">
+                    <input
+                      type={showConfirmPassword ? "text" : "password"}
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      placeholder="Enter password"
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      required
+                      className="block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute inset-y-0 right-0 px-3 text-sm text-gray-500 hover:text-blue-600"
+                    >
+                      {showConfirmPassword ? "Hide" : "Show"}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="flex justify-end pt-4">
+                  <button
+                      type="submit"
+                      className="text-blue-600 font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      Next
+                  </button>
+
+                </div>
+              </form>
+            </div>
+
+            {/* Footer (mobile only) */}
+            <div className="w-full text-center mt-8 lg:hidden">
+              <p className="text-sm text-gray-600">
+                Already on Enum?{" "}
+                <a href="#" className="font-semibold text-blue-600 hover:underline">
+                  Log in
+                </a>
+              </p>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
+      
   )
 }
 

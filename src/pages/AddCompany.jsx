@@ -195,7 +195,7 @@ export default function AddCompany() {
           <div className="flex-1">
             <h3 className="text-xl font-semibold mb-4">Usage preference</h3>
 
-            <div className="h-80 overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="h-80 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
               {usageOptions.map((option) => {
                 const isSelected = form.usagePreferences.includes(option);
                 return (
@@ -271,36 +271,54 @@ export default function AddCompany() {
   };
 
   return (
-    <div className="h-screen   flex items-center justify-center p-6 bg-gray-50">
-      {/* MAIN CONTAINER */}
-      <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 bg-gray-50 rounded-lg shadow-lg min-h-[620px]">
-        {/* Left Panel */}
-        <div className="p-8 border-r bg-gray-50">
-          <h2 className="text-2xl font-bold mb-6">Add <br/> company</h2>
-          <p className="text-gray-600 mb-8">
-            Nice work, <b>David</b>. Just one more step — <br />
+    <div className="min-h-screen bg-white flex items-center justify-center">
+
+      {/* Main container */}
+      <div className=" relative w-[884px] h-[690px] bg-gray-50 text-gray-800  rounded-xl  flex overflow-hidden">
+      <div className="mb-6">
+        <button
+          type="button"
+          onClick={() => navigate(-1)} // go back to previous page
+          className="flex items-center text-black text-sm font-medium hover:text-gray-700"
+        >
+          <span className="mr-2 text-xl">←</span> {/* small black arrow */}
+          
+        </button>
+      </div>
+
+
+        
+        {/* LEFT PANEL */}
+        <div className="w-[360px] px-10 py-12">
+          <h2 className="text-[32px] font-bold leading-tight mb-6">
+            Add <br /> company
+          </h2>
+  
+          <p className="text-gray-500 text-sm leading-relaxed mb-10">
+            Nice work, <span className="font-medium text-gray-900">David</span>. Just one more step —
+            <br />
             Now, let’s complete your setup with your organization’s info.
           </p>
-
-          <ul className="space-y-4">
+  
+          <ul className="space-y-6">
             {["Details", "Short description", "Usage preference", "Logo"].map(
               (step) => (
                 <li
                   key={step}
                   onClick={() => setActiveStep(step)}
-                  className="cursor-pointer flex items-center"
+                  className="flex items-center cursor-pointer"
                 >
                   <span
-                    className={`w-1 h-6 mr-3 ${
+                    className={`w-[3px] h-6 mr-4 rounded-full ${
                       activeStep === step ? "bg-blue-600" : "bg-transparent"
                     }`}
                   />
                   <span
-                    className={
+                    className={`text-sm ${
                       activeStep === step
                         ? "text-blue-600 font-semibold"
-                        : "text-gray-700"
-                    }
+                        : "text-gray-500"
+                    }`}
                   >
                     {step}
                   </span>
@@ -309,11 +327,16 @@ export default function AddCompany() {
             )}
           </ul>
         </div>
-
-        {/* Right Panel */}
-        <div className="p-8 bg-white rounded-r-lg flex flex-col">
-          {renderStepContent()}
+        
+  
+        {/* RIGHT PANEL */}
+        <div className="flex-1 flex flex-col bg-gray-50 p-10">
+          {/* White card inside gray panel */}
+          <div className="bg-white rounded-2xl p-8 shadow-sm flex-1 overflow-y-auto">
+            {renderStepContent()}
+          </div>
         </div>
+        
       </div>
     </div>
   );
