@@ -104,17 +104,17 @@ const LetMeetYou = () => {
               <h1 className="text-4xl font-bold text-gray-900 mb-4">
                 Let's meet <br />you
               </h1>
-              <p className="text-gray-600 mb-8">
+              <p className="text-[#475467] mb-8">
                 Just a few details to get you started — including verifying your email — so we can personalize your setup
                 and unlock the right tools for you.
               </p>
 
               <nav className="space-y-4">
-                <span className="flex items-center p-3 border-l-4 border-blue-600 font-semibold text-blue-600">
+                <span className="flex items-center p-3 h-6 border-l-2 border-blue-600 font-semibold text-[#095AD3]">
                   Basic info
                 </span>
                 <span
-                  className="flex items-center p-3 border-l-4 border-transparent text-gray-400 cursor-not-allowed"
+                  className="flex items-center p-3 border-l-4 h-6 border-transparent text-gray-400 cursor-not-allowed"
                 >
                   Email verification
                 </span>
@@ -244,7 +244,7 @@ const LetMeetYou = () => {
                 <div className="flex justify-end pt-4">
                   <button
                       type="submit"
-                      className="text-blue-600 font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="text-blue-600 font-semibold hover:underline"
                     >
                       Next
                   </button>

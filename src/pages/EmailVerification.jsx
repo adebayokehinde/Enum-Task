@@ -75,7 +75,7 @@ const EmailVerification = () => {
                 <span className="flex items-center p-3 border-l-4 border-transparent text-gray-500">
                   Basic info
                 </span>
-                <span className="flex items-center p-3 border-l-4 border-blue-600 font-semibold text-blue-600">
+                <span className="flex items-center p-3 h-6 border-l-2 border-blue-600 font-semibold text-blue-600">
                   Email verification
                 </span>
               </nav>
@@ -110,21 +110,22 @@ const EmailVerification = () => {
 
                 <div className="mt-6">
                   <h3 className="font-semibold text-gray-800 mb-2">Didn’t receive the email?</h3>
-                  <ul className="list-decimal list-inside text-gray-600 text-sm space-y-1">
+                  <ul className="list-decimal list-inside text-gray-600 text-sm space-y-4 text-[#475467]">
                     <li>Check spam or promotions.</li>
                     <li>Confirm your email is correct.</li>
                     <li>Email may be auto-filled incorrectly.</li>
                     <li>Company filters blocked email.</li>
-                  </ul>
-                  <p className="text-blue-600 text-sm mt-2 cursor-pointer hover:underline">
+                    <p className="text-blue-600 text-sm mt-2 cursor-pointer hover:underline ">
                     Re-enter your email address
                   </p>
+                  </ul>
+
                 </div>
 
                 <div className="flex justify-end pt-4">
                   <button
                     type="submit"
-                    className="text-blue-600 font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="text-blue-600 font-semibold hover:underline focus:outline-none"
                   >
                     Verify
                   </button>

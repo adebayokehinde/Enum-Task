@@ -34,13 +34,13 @@ export default function InviteTeam() {
   return (
     <div className=" min-h-screen  flex justify-center pt-12">
       <div className=" relative h-[296px] w-[867px] flex flex-col  bg-gray-50 text-gray-800">
-      <div className="absolute top-0 left-0 w-full flex justify-between px-10 pt-6">
+      <div className="absolute top-0 left-0 pl-6 w-full flex justify-between px-10 pt-6">
         <button
           type="button"
-          onClick={() => navigate(-1)} // go back to previous page
+          onClick={() => navigate(-1)} 
           className="flex items-center text-black text-sm font-medium hover:text-gray-700"
         >
-          <span className="mr-2 text-xl">←</span> {/* small black arrow */}
+          <span className="mr-2 text-xl">←</span>
           
         </button>
       </div>

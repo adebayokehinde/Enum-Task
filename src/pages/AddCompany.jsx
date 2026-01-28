@@ -59,7 +59,8 @@ export default function AddCompany() {
           <form className="space-y-4 flex-1">
             <div>
               <label className="block text-sm font-medium text-gray-700">
-                Company name*
+                Company name<span className="text-red-500 ml-0.5">*</span>
+
               </label>
               <input
                 type="text"
@@ -78,7 +79,7 @@ export default function AddCompany() {
                 name="industry"
                 value={form.industry}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                className="mt-1 block w-full border border-gray-300 rounded-md p-3"
               >
                 <option value="">Select industry</option>
                 <option value="tech">Technology</option>
@@ -122,7 +123,7 @@ export default function AddCompany() {
                 name="companySize"
                 value={form.companySize}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                className="mt-1 block w-full border border-gray-300 rounded-md p-3"
               >
                 <option value="">Select size</option>
                 <option value="1-10">1–10 employees</option>
@@ -148,9 +149,11 @@ export default function AddCompany() {
         return (
           <div className="flex-1">
             <h3 className="text-xl font-semibold mb-4">Short description</h3>
+            <p className="text-gray-500 text-sm leading-relaxed mb-2">Give a short description of your company</p>
 
             <textarea
               name="description"
+              placeholder="Enter text hear"
               rows="6"
               maxLength={1000}
               value={form.description}
@@ -180,13 +183,14 @@ export default function AddCompany() {
           "To train partners",
           "To sell assessments",
           "To train customers",
+          "To sell courses",
           "To hire talent",
           "To sell question banks",
           "To manage talent",
           "To manage hub",
           "To host live classes",
-          "To create events",
-          "For credentialing",
+          "to manage event",
+          "for credentaling",
           "To create courses",
           "To manage programs",
         ];
@@ -194,8 +198,9 @@ export default function AddCompany() {
         return (
           <div className="flex-1">
             <h3 className="text-xl font-semibold mb-4">Usage preference</h3>
+            <div className="max-h-80 overflow-y-auto">
 
-            <div className="h-80 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="flex flex-wrap gap-3">
               {usageOptions.map((option) => {
                 const isSelected = form.usagePreferences.includes(option);
                 return (
@@ -203,7 +208,7 @@ export default function AddCompany() {
                     key={option}
                     type="button"
                     onClick={() => togglePreference(option)}
-                    className={`px-4 py-2 rounded-full text-sm text-left ${
+                    className={`inline-flex items-center px-4 py-2 rounded-full text-sm whitespace-nowrap ${
                       isSelected
                         ? "bg-blue-100 text-blue-700"
                         : "bg-gray-100 text-gray-700"
@@ -212,7 +217,9 @@ export default function AddCompany() {
                     {option}
                   </button>
                 );
+            
               })}
+            </div>
             </div>
 
             <div className="flex justify-end pt-6">
