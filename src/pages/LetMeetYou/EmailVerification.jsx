@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { IoMdArrowBack } from "react-icons/io";
 
 const EmailVerification = () => {
   const [email, setEmail] = useState("");
   const [timer, setTimer] = useState(120);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  const [toast, setToast] = useState(""); // For non-blocking message
+  const [toast, setToast] = useState(""); 
 
   const navigate = useNavigate();
 
@@ -52,17 +53,17 @@ const EmailVerification = () => {
       <div className="mb-6">
         <button
           type="button"
-          onClick={() => navigate(-1)} // go back to previous page
-          className="flex items-center text-black text-sm font-medium hover:text-gray-700"
+          onClick={() => navigate(-1)} 
+          className="absolute top-2 left-9 text-xl"
         >
-          <span className="mr-2 text-xl">←</span> 
+          <IoMdArrowBack />
           
         </button>
       </div>
         
 
         {/* Main section */}
-        <main className="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-12 px-6 md:px-10 overflow-y-auto">
+        <main className="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-12 px-6 md:px-10 ">
           {/* Left Stepper */}
           <div className="lg:col-span-1">
             <div className="max-w-md">
@@ -119,9 +120,7 @@ const EmailVerification = () => {
                     Re-enter your email address
                   </p>
                   </ul>
-
                 </div>
-
                 <div className="flex justify-end pt-4">
                   <button
                     type="submit"
@@ -134,15 +133,11 @@ const EmailVerification = () => {
             </div>
           </div>
         </main>
-
-        {/* Toast Message */}
         {toast && (
           <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-6 py-3 rounded-md shadow-lg animate-fadeInOut">
             {toast}
           </div>
         )}
-
-        {/* Tailwind Animation */}
         <style>{`
           @keyframes fadeInOut {
             0% { opacity: 0; }
@@ -158,5 +153,4 @@ const EmailVerification = () => {
     </div>
   );
 };
-
 export default EmailVerification;
