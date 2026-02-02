@@ -1,0 +1,59 @@
+import {
+    Home,
+    BookOpen,
+    Users,
+    FileText,
+    ClipboardCheck,
+    MessageSquare,
+    Calendar,
+    Bell,
+    Megaphone,
+    User,
+    Settings,
+    LogOut
+  } from "lucide-react"
+  
+  const Sidebar = () => {
+    return (
+      <aside className="absolute top-[80px] left-0 w-[286px] h-[calc(100vh-80px)] border-r border-gray-200 bg-white flex flex-col justify-between px-4 py-6 ">
+        
+        {/* Top section */}
+        <nav className="space-y-2">
+          <SidebarItem icon={<Home size={18} />} label="Home" active />
+          <SidebarItem icon={<BookOpen size={18} />} label="Training institutes" />
+          <SidebarItem icon={<Users size={18} />} label="Instructors" />
+          <SidebarItem icon={<FileText size={18} />} label="Learners" />
+          <SidebarItem icon={<ClipboardCheck size={18} />} label="Applications" />
+          <SidebarItem icon={<ClipboardCheck size={18} />} label="Assessment" />
+          <SidebarItem icon={<MessageSquare size={18} />} label="Question bank" />
+          <SidebarItem icon={<FileText size={18} />} label="Forms" />
+          <SidebarItem icon={<Calendar size={18} />} label="Calendar" />
+          <SidebarItem icon={<Bell size={18} />} label="Notifications" />
+          <SidebarItem icon={<Megaphone size={18} />} label="Announcements" />
+        </nav>
+  
+        {/* Bottom section */}
+        <div className="space-y-1 pt-4">
+          <SidebarItem icon={<User size={18} />} label="Profile" />
+          <SidebarItem icon={<Settings size={18} />} label="Configuration" />
+          <SidebarItem icon={<LogOut size={18} />} label="Log out" />
+        </div>
+      </aside>
+    )
+  }
+  
+  const SidebarItem = ({ icon, label, active }) => {
+    return (
+      <div
+        className={`flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer text-sm
+          ${active ? "bg-blue-50 text-blue-600 font-medium" : "text-gray-600 hover:bg-gray-100"}
+        `}
+      >
+        {icon}
+        {label}
+      </div>
+    )
+  }
+  
+  export default Sidebar
+  

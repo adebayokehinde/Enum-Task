@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./component/Layout";
+import Layout from "./components/Layout";
 import LetMeetYou from "./pages/LetMeetYou/LetMeetYou";
 import AddCompany from "./pages/AddCompany/AddCompany";
 import InviteTeam from "./pages/InviteTeam/InviteTeam";
 import EmailVerification from "./pages/LetMeetYou/EmailVerification";
 import LetMeetYouMobile from "./pages/LetMeetYou/LetMeetYouMobile";
-import Dashboard from "./pages/DashboardPage/DashboardPage";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
