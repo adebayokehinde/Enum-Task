@@ -1,8 +1,8 @@
 import React from "react";
 import Card from "./Card";
-import HumanIcon from "../assets/users-01.png";
-import Book from "../assets/book-open-01.png";
-import Building from "../assets/building-08.png";
+import HumanIcon from "../../assets/users-01.png";
+import Book from "../../assets/book-open-01.png";
+import Building from "../../assets/building-08.png";
 
 const CardRow = () => {
   return (

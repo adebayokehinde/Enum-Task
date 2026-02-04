@@ -29,7 +29,6 @@ export default function CoursePerformance() {
 
   return (
     <div className="bg-white border border-gray-300 rounded-[12px] h-[650px] w-full max-w-[778px]">
-
       <div className="p-6">
         <div className="flex flex-wrap justify-between items-center gap-2 mb-2">
           <h1 className="text-xl font-semibold text-gray-800">
@@ -76,7 +75,7 @@ export default function CoursePerformance() {
       {/* Chart */}
       <div className="h-[600px] sm:h-[320px] md:h-[360px] px-4 sm:px-6 pb-6">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data}>
+          <AreaChart data={data} margin={{ left: 10, right: 20, bottom: 30 }}>
             <defs>
               <linearGradient
                 id="enrollmentGradient"
@@ -90,8 +89,33 @@ export default function CoursePerformance() {
               </linearGradient>
             </defs>
 
-            <XAxis dataKey="month" tickLine={false} axisLine={false} />
-            <YAxis tickLine={false} axisLine={false} />
+            {/* X Axis – MONTH */}
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              label={{
+                value: "Month",
+                position: "insideBottom",
+                offset: -10,
+                fill: "#6b7280",
+                fontSize: 12,
+              }}
+            />
+
+            {/* Y Axis – ENROLLMENT */}
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              label={{
+                value: "Enrollment",
+                angle: -90,
+                position: "insideLeft",
+                fill: "#6b7280",
+                fontSize: 12,
+              }}
+            />
+
             <Tooltip />
 
             <Area

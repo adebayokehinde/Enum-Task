@@ -86,7 +86,7 @@ export default function RecentPartnerInstitutes() {
 
           <tbody>
             {institutes.map((inst, index) => (
-              <tr key={index} className="border-b last:border-b-0 hover:bg-gray-50">
+              <tr key={index} className="hover:bg-gray-50">
                 <td className="py-3 px-4 flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gray-100 overflow-hidden">
                     <img

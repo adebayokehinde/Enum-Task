@@ -76,7 +76,7 @@ export default function Instructors() {
             {instructors.map((inst, index) => (
               <tr
                 key={index}
-                className="border-b last:border-b-0 hover:bg-gray-50"
+                className="hover:bg-gray-50"
               >
                 {/* Name */}
                 <td className="py-3 px-4 flex items-center gap-3">
