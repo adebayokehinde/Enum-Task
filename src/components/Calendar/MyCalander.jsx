@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';  
-import './CustomCalendar.css';               
+import './customCalendar.css';               
 import calendarImage from "../../assets/calendar-check-01.png";
 
 function MyCalendar() {
