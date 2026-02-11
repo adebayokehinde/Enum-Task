@@ -1,4 +1,4 @@
-import productiveLogo from "../assets/Ashley-immanuel 1.png";
+import productiveLogo from "../assets/Ashley-Immanuel 1.png";
 import semicolonLogo from "../assets/Avatar (2).png";
 
 const instructors = [
