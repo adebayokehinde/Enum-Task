@@ -5,14 +5,14 @@ const usageOptions = [
     "To train customers",
     "To sell courses",
     "To hire talent",
-    "To sell question banks",
+    "To sell q,uestion banks",
     "To manage talent",
     "To manage hub",
     "To host live classes",
     "To manage event",
     "For credentialing",
     "To create courses",
-    "To manage programs",
+    "To manage programs"
   ];
   
   export default function UsagePreferenceStep({

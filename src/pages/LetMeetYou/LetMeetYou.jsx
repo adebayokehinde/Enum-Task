@@ -20,30 +20,12 @@ const LetMeetYou = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
-  
-  useEffect(() => {
-    const handleResize = () => {
-      const path = window.location.pathname
-
-      if (window.innerWidth < 768 && path !== "/letmeetyoumobile") {
-        navigate("/letmeetyoumobile")
-      } else if (window.innerWidth >= 768 && path !== "/letmeetyou") {
-        navigate("/letmeetyou")
-      }
-    }
-
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [navigate])
-
- 
+  // Load saved form data
   useEffect(() => {
     const saved = localStorage.getItem("letMeetYouForm")
     if (saved) setFormData(JSON.parse(saved))
   }, [])
 
- 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
@@ -68,20 +50,34 @@ const LetMeetYou = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
-      <div className="relative w-[884px] h-[690px] bg-gray-50 rounded-xl flex overflow-hidden">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4">
+      
+      {/* MAIN CARD CONTAINER */}
+      <div className="relative w-full max-w-[884px] min-h-[690px] bg-gray-50 rounded-xl flex flex-col lg:flex-row overflow-hidden">
 
-        {/* Back arrow */}
+        {/* BACK BUTTON */}
         <button
           onClick={() => navigate(-1)}
-          className="absolute top-2 left-9 text-xl"
+          className="absolute top-4 left-4 text-xl"
         >
           <IoMdArrowBack />
         </button>
 
-        <main className="flex h-full gap-12 px-10 py-8 overflow-y-auto">
+        <main className="flex flex-col lg:flex-row h-full gap-10 px-6 lg:px-10 py-10 w-full">
 
-          {/* LEFT SIDE (desktop only) */}
+          {/* MOBILE STEP HEADER */}
+          <div className="lg:hidden w-full">
+            <div className="flex gap-6 border-b pb-4 mb-6">
+              <div className="text-[#095AD3] font-semibold border-b-2 border-[#095AD3] pb-2">
+                Basic info
+              </div>
+              <div className="text-gray-400">
+                Email verification
+              </div>
+            </div>
+          </div>
+
+          {/* DESKTOP LEFT SIDE */}
           <aside className="hidden lg:block w-1/3">
             <h1 className="text-4xl font-bold mb-4">
               Let's meet <br /> you
@@ -93,17 +89,17 @@ const LetMeetYou = () => {
             </p>
 
             <nav className="space-y-4">
-              <div className="flex items-center border-l-2 border-[#095AD3] pl-3 text-[#095AD3] font-semibold">
+              <div className="border-l-2 border-[#095AD3] pl-3 text-[#095AD3] font-semibold">
                 Basic info
               </div>
-              <div className="flex items-center border-l-2 border-transparent pl-3 text-gray-400">
+              <div className="border-l-2 border-transparent pl-3 text-gray-400">
                 Email verification
               </div>
             </nav>
           </aside>
 
-          {/* RIGHT SIDE (form area) */}
-          <section className="flex-1 flex flex-col items-start">
+          {/* FORM SECTION */}
+          <section className="flex-1 flex flex-col items-start w-full">
             <BasicInfoStep
               formData={formData}
               handleChange={handleChange}
@@ -114,7 +110,7 @@ const LetMeetYou = () => {
               setShowConfirmPassword={setShowConfirmPassword}
             />
 
-            {/* Mobile footer */}
+            {/* MOBILE FOOTER */}
             <div className="mt-8 lg:hidden w-full text-center">
               <p className="text-sm text-gray-600">
                 Already on Enum?{" "}
@@ -124,6 +120,7 @@ const LetMeetYou = () => {
               </p>
             </div>
           </section>
+
         </main>
       </div>
     </div>
