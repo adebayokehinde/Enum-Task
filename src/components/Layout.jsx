@@ -5,7 +5,7 @@ import { FiMenu } from "react-icons/fi";
 
 // Steps with all relevant paths for each step
 const steps = [
-  { name: "Let’s meet you", paths: ["/letmeetyou", "/email-verification"] },
+  { name: "Let’s meet you", paths: ["/", "/letmeetyou", "/email-verification"] },
   { name: "Add company", paths: ["/addcompany"] },
   { name: "Invite your team", paths: ["/inviteteam"] },
 ];
@@ -16,7 +16,7 @@ const Layout = () => {
 
   // Find current step index based on location, including subpages
   const currentIndex = steps.findIndex((step) =>
-    step.paths.some((p) => location.pathname.toLowerCase().startsWith(p.toLowerCase()))
+    step.paths.some((p) => location.pathname.toLowerCase() === p.toLowerCase())
   );
 
   return (

@@ -1,27 +1,29 @@
-import React from "react"
-import { NavLink } from "react-router-dom"
-import logo from "../assets/Enum_Logo_White 1.png"
-import { IoClose } from "react-icons/io5"
+import React from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import logo from "../assets/Enum_Logo_White 1.png";
+import { IoClose } from "react-icons/io5";
 
 const steps = [
   {
     name: "Let’s meet you",
     description: "With your name and work email",
-    path: "/letmeetyou",
+    paths: ["/", "/letmeetyou", "/email-verification"], // ← include root
   },
   {
     name: "Add company",
     description: "Create your space on Enum",
-    path: "/addcompany",
+    paths: ["/addcompany"],
   },
   {
     name: "Invite your team",
     description: "Start collaborating with your team",
-    path: "/inviteteam",
+    paths: ["/inviteteam"],
   },
-]
+];
 
 const Sidebar = ({ showSidebar, setShowSidebar }) => {
+  const location = useLocation();
+
   return (
     <>
       {/* OVERLAY (mobile only) */}
@@ -34,10 +36,10 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 
       <div
         className={`
-        fixed top-0 left-0 h-screen w-64 bg-blue-600 text-white flex flex-col p-6 z-50
-        transform transition-transform duration-300
-        ${showSidebar ? "translate-x-0" : "-translate-x-full"}
-        md:translate-x-0
+          fixed top-0 left-0 h-screen w-64 bg-blue-600 text-white flex flex-col p-6 z-50
+          transform transition-transform duration-300
+          ${showSidebar ? "translate-x-0" : "-translate-x-full"}
+          md:translate-x-0
         `}
       >
         {/* CLOSE BUTTON (mobile only) */}
@@ -55,42 +57,43 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 
         {/* STEPS */}
         <div className="space-y-4">
-          {steps.map((step, index) => (
-            <NavLink key={step.path} to={step.path} className="flex gap-4">
-              {({ isActive }) => (
-                <>
-                  <div className="flex flex-col items-center">
+          {steps.map((step, index) => {
+            // Check if current path is included in step.paths
+            const isActive = step.paths.some((p) =>
+              location.pathname.toLowerCase() === p.toLowerCase()
+            );
+
+            return (
+              <NavLink key={index} to={step.paths[0]} className="flex gap-4">
+                <div className="flex flex-col items-center">
+                  <div
+                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      isActive ? "bg-white border-white" : "border-white"
+                    }`}
+                  >
+                    {isActive && <span className="w-2 h-2 bg-blue-600 rounded-full" />}
+                  </div>
+
+                  {index !== steps.length - 1 && (
                     <div
-                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                        isActive
-                          ? "bg-white border-white"
-                          : "border-white"
+                      className={`w-px h-12 mt-1 ${
+                        isActive ? "bg-white" : "bg-white/50"
                       }`}
-                    >
-                      {isActive && (
-                        <span className="w-2 h-2 bg-blue-600 rounded-full" />
-                      )}
-                    </div>
+                    />
+                  )}
+                </div>
 
-                    {index !== steps.length - 1 && (
-                      <div className="w-px h-12 bg-white mt-1" />
-                    )}
-                  </div>
-
-                  <div>
-                    <p className="font-semibold">{step.name}</p>
-                    <p className="text-sm text-white/80">
-                      {step.description}
-                    </p>
-                  </div>
-                </>
-              )}
-            </NavLink>
-          ))}
+                <div>
+                  <p className="font-semibold">{step.name}</p>
+                  <p className="text-sm text-white/80">{step.description}</p>
+                </div>
+              </NavLink>
+            );
+          })}
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
