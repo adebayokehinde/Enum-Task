@@ -33,8 +33,9 @@ export default function InviteTeam() {
   };
 
   return (
-    <div className=" min-h-screen  flex justify-center pt-12">
-      <div className=" relative h-[296px] w-[867px] flex flex-col  bg-gray-50 text-gray-800">
+    <div className="min-h-screen flex justify-center px-4 pt-6 md:pt-12">
+      <div className="relative w-full max-w-[867px] md:h-[296px] flex flex-col bg-gray-50 text-gray-800">
+
       <div  
         onClick={() => navigate(-1)}
         className="absolute top-6  left-6 text-xl font-medium">
@@ -52,8 +53,10 @@ export default function InviteTeam() {
         </div>
 
         {/* Main section */}
-        <main className="flex flex-col items-center justify-center flex-grow px-6">
-          <div className="max-w-4xl w-full flex flex-col md:flex-row items-start gap-12">
+        <main className="flex flex-col items-center justify-center flex-grow px-4 md:px-6">
+
+          <div className="max-w-4xl w-full flex flex-col md:flex-row items-start gap-8 md:gap-12">
+
             {/* Left section */}
             <div className="flex-1">
               <h2 className="text-3xl font-bold mb-3 text-gray-900">
@@ -75,7 +78,8 @@ export default function InviteTeam() {
             </div>
 
             {/* Right section (form) */}
-            <div className="flex-1 bg-white rounded-lg p-6 border border-gray-200">
+            <div className="flex-1 w-full bg-white rounded-lg p-4 md:p-6 border border-gray-200">
+
               <label
                 htmlFor="emails"
                 className="block text-sm font-medium text-gray-700 mb-2"
@@ -129,8 +133,10 @@ export default function InviteTeam() {
         </main>
 
         {/* Bottom section */}
-        <footer className="mt-10 py-6 px-6 flex justify-between items-center pt-8">
-          <div className="flex items-center bg-white ">
+        <footer className="mt-10 py-6 px-4 md:px-6 flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-start md:items-center pt-8">
+
+        <div className="flex items-start md:items-center bg-white">
+
             <input
               type="checkbox"
               id="agree"
